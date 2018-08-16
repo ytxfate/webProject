@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.img_body{
+    width: 100%;
+}
+.load_img{
+    height: 300px;
+}
+.lazy_img{
+    height: 300px;
+}
