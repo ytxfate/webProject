@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>img.onload 异步加载图片</title>
+</head>
+
+<body>
+    <div id="img_box">
+        <img data-src="./test.jpg" alt="">
+        <img data-src="./test1.jpg" alt="">
+        <img data-src="./test2.jpg" alt="">
+    </div>
+
+    <script>
+        function loadImage(obj, url, callback) {
+            var img = new Image();
+            img.src = url;
+
+            // 判断图片是否在缓存中
+            if (img.complete) {
+                callback.call(img, obj);
+                return;
+            }
+
+            // 图片加载到浏览器的缓存中回调函数
+            img.onload = function () {
+                callback.call(img, obj);
+            }
+        }
+
+        function showImage(obj) {
+            obj.src = this.src;
+        }
+
+        var imgs = document.querySelectorAll('img');
+        for (var i = 0; i < imgs.length; i++) {
+            var url = imgs[i].dataset.src;
+            loadImage(imgs[i], url, showImage);
+        }
+    </script>
+</body>
+
+</html>
