@@ -1,13 +1,19 @@
 var throttle = function (func, lazy_time) {
-    var timeout = null;
+    var timeout = null;     //处理定时器
+    //得到事件触发的时间
     var startTime = new Date();
     return function () {
+        //获取当前时间
         var nowTime = new Date();
+        //清除定时器，以达到节流的目的
         clearTimeout(timeout);
+        //每隔 lazy_time 时间段执行一次 func() 函数
         if (nowTime - startTime >= lazy_time) {
             func();
+            // 函数执行后重置事件触发的时间
             startTime = nowTime;
         } else {
+            // 设置定时器，定时执行 func() 函数
             timeout = setTimeout(func, lazy_time);
         }
     }
@@ -41,5 +47,7 @@ var lazy_load_img = function () {
 }
 
 
-lazy_load_img(); //页面加载时初始化已显示页面区域部分的图片
+//页面加载时初始化已显示页面区域部分的图片
+lazy_load_img();
+//添加页面 scroll 的监听事件
 window.addEventListener('scroll', throttle(lazy_load_img, 700), false);
