@@ -29,7 +29,7 @@ var lazy_load_img = function () {
         var img_out_div_height = img_out_div[i].offsetTop;
         // console.log('第'+ i +'张img所在div在网页中的高: ' + img_out_div_height);
         //判断当前img的src是否已经修改
-        var img_url = img_tag[i].getAttribute('lazy-src')
+        var img_url = img_tag[i].getAttribute('data-src')
         if (img_url !== img_tag[i].src) {
             //判断img所在div是否在用户可见区域或可见区域底端以上
             if (img_out_div_height < scroll_height + user_client_height) {
